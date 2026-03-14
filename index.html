@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Buddyrow</title>
+    <style>
+        body { background: #fdf6f0; font-family: sans-serif; text-align: center; padding: 20px; color: #4a4e69; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        .box { max-width: 400px; width: 90%; }
+        h1 { font-weight: 300; letter-spacing: 3px; margin-bottom: 20px; color: #726a95; }
+        #daily-quote { font-style: italic; font-size: 1.2rem; margin-bottom: 30px; min-height: 100px; display: flex; align-items: center; justify-content: center; line-height: 1.5; padding: 0 10px; }
+        textarea { width: 100%; height: 150px; border-radius: 15px; border: 1px solid #ddd; padding: 15px; box-sizing: border-box; outline: none; font-size: 1rem; transition: all 0.8s; background: white; }
+        button { margin-top: 20px; background: #9a8c98; color: white; border: none; padding: 15px 40px; border-radius: 25px; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        button:active { transform: scale(0.95); background: #726a95; }
+        #sissy-msg { margin-top: 25px; font-weight: bold; opacity: 0; transition: 1s; color: #726a95; font-size: 1.1rem; position: absolute; left: 0; right: 0; pointer-events: none; }
+        .released { opacity: 0; transform: translateY(-20px) scale(0.9); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>BUDDYROW</h1>
+        <div id="daily-quote">Loading your message...</div>
+        <div style="position: relative;">
+            <textarea id="vent" placeholder="Type what's bothering you..."></textarea>
+            <div id="sissy-msg">It'll get better, love you Sissy.</div>
+        </div>
+        <button id="btn" onclick="releaseVent()">Release it</button>
+    </div>
+
+    <script>
+        const quotes = [
+            "You are doing enough, even on the days you don't feel like it.",
+            "This feeling is a tunnel, not a cave. There is light at the end.",
+            "You are loved more than you can possibly imagine.",
+            "Be proud of yourself for just showing up today.",
+            "Peace isn't the absence of trouble, but the presence of strength.",
+            "Softness is not weakness. You are brave for feeling.",
+            "One day at a time. One breath at a time.",
+            "When you hold the world in your hands you can crush the parts that piss you off",
+            "Your value is not tied to your productivity.",
+            "It is okay to rest. The world will wait for you.",
+            "You have survived every 'worst day' of your life so far.",
+            "Growth is often quiet. You are changing for the better.",
+            "Be gentle with your heart today.",
+            "You are a vital part of this world.",
+            "Mistakes are just proof that you are trying.",
+            "You don't have to have it all figured out right now.",
+            "Your feelings are valid, even if they are heavy.",
+            "Small progress is still progress.",
+            "You are capable of more than you know.",
+            "The storm will pass, and the sun will find you again.",
+            "You are not a burden. You are a person who is loved.",
+            "Believe in the person you are becoming.",
+            "One such a big day you must release the Kraken",
+            "You are stronger than the things that are trying to break you.",
+            "Your story isn't over yet.",
+            "Take a deep breath. You are safe in this moment.",
+            "It's okay to not be okay. Healing takes time.",
+            "You are worthy of all the good things coming your way.",
+            "Every day is a new chance to be kind to yourself.",
+            "You have a heart of gold, don't let the world dull it.",
+            "You are far more resilient than you give yourself credit for.",
+            "Let today be the day you forgive yourself for yesterday.",
+            "You are a light in many people's lives.",
+            "Your strength is quiet but it is powerful.",
+            "Don't let a bad day convince you that you have a bad life.",
+            "You belong here.",
+            "The world is better because you are in it.",
+            "You are allowed to take up space.",
+            "Your existence is a gift to those around you.",
+            "Inhale courage, exhale fear.",
+            "You are the architect of your own peace.",
+            "It's okay to let go of what weighs you down.",
+            "You are braver than you believe.",
+            "Be your own best friend today.",
+            "Your potential is endless.",
+            "Keep going, the view is going to be worth it.",
+            "You are precious and rare.",
+            "Don't give up on yourself.",
+            "You are sunshine on a cloudy day.",
+            "Your heart is a beautiful place.",
+            "Trust the timing of your life.",
+            "You are absolutely wonderful.",
+            "A rough patch is just a patch, not the whole road.",
+            "You have a strength that surprises even you.",
+            "Resting is part of the work.",
+            "You don't have to be perfect to be amazing.",
+            "Your light hasn't gone out; it's just recharging.",
+            "You are more than your current struggles.",
+            "Be patient with your progress.",
+            "You have a beautiful soul.",
+            "you are beautiful when you smile it makes you look like your up to something",
+            "Your presence is a comfort to those who love you.",
+            "You are exactly where you need to be to grow."
+        ];
+
+        window.onload = function() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const display = document.getElementById('daily-quote');
+            if (display) {
+                display.innerText = quotes[randomIndex];
+            }
+        };
+
+        function releaseVent() {
+            const v = document.getElementById('vent');
+            const s = document.getElementById('sissy-msg');
+            const b = document.getElementById('btn');
+
+            if(v.value.trim() === "") return;
+
+            v.classList.add('released');
+            b.style.visibility = 'hidden';
+
+            setTimeout(() => {
+                v.value = "";
+                s.style.opacity = "1";
+            }, 800);
+
+            setTimeout(() => {
+                v.classList.remove('released');
+                s.style.opacity = "0";
+                b.style.visibility = 'visible';
+                // Pick a new quote for next time automatically
+                const newIndex = Math.floor(Math.random() * quotes.length);
+                document.getElementById('daily-quote').innerText = quotes[newIndex];
+            }, 5800);
+        }
+    </script>
+</body>
+</html>
